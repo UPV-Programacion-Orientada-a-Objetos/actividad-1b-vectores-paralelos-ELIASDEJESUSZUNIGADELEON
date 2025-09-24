@@ -90,9 +90,24 @@ int main() {
                 }
                 break;
             }
-            case 3:
+            case 3:{
                 // Generar reporte completo
+                std::cout << "--- Reporte de Inventario ---" << std::endl;
+                std::cout << "Codigo    | Nombre               | Stock | Precio" << std::endl;
+                std::cout << "-------------------------------------------------" << std::endl;
+                for (int i = 0; i < num; ++i) {
+                    std::cout << codigos[i] << "       | "
+                              << nombres[i];
+                    // Espacios para alinear nombres pequeños
+                    int espacios = 20 - nombres[i].length();
+                    for (int e = 0; e < espacios; ++e) std::cout << " ";
+                        std::cout << "| " << stock[i]
+                                 << "    | $" << precios[i] << std::endl;
+                    }
+                std::cout << "-------------------------------------------------" << std::endl;
+                std::cout << "--- Fin del Reporte ---" << std::endl;
                 break;
+            }
             case 4:
                 // Encontrar el producto mas caro
                 break;
