@@ -42,34 +42,54 @@ int main() {
         std::cin >> opcion;
         // Validar entrada aun falta
         switch (opcion) {
-            case 1:
+            case 1: {
                 // Consultar un producto
-                    {
-                    int codigoBuscar;
-                    std::cout << "Ingrese el codigo del producto a consultar: ";
-                    std::cin >> codigoBuscar;
-                    // Buscar el producto por codigo
-                    bool encontrado = false;
-                    for (int i = 0; i < numProductos; ++i) {
-                        if (codigos[i] == codigoBuscar) {
-                            // Si el producto existe se mostrara su informacion
-                            std::cout << "Informacion del Producto:" << std::endl;
-                            std::cout << "Codigo: " << codigos[i] << std::endl;
-                            std::cout << "Nombre: " << nombres[i] << std::endl;
-                            std::cout << "Cantidad en stock: " << stock[i] << std::endl;
-                            std::cout << "Precio unitario: $" << precios[i] << std::endl;
-                            encontrado = true;
-                            break;
-                        }
+                int Buscar;
+                std::cout << "Ingrese el codigo del producto a consultar: ";
+                std::cin >> Buscar;
+                bool encontrado = false;
+                for (int i = 0; i < num; ++i) {
+                    if (codigos[i] == Buscar) {
+                        std::cout << "Informacion del Producto:" << std::endl;
+                        std::cout << "Codigo: " << codigos[i] << std::endl;
+                        std::cout << "Nombre: " << nombres[i] << std::endl;
+                        std::cout << "Cantidad en stock: " << stock[i] << std::endl;
+                        std::cout << "Precio unitario: $" << precios[i] << std::endl;
+                        encontrado = true;
+                        break;
                     }
-                    if (!encontrado) {
-                        // Si el producto no existe 
-                        std::cout << "Error: El producto con codigo " << codigoBuscar << " no existe." << std::endl;
-                    }
+                }
+                if (!encontrado) {
+                    std::cout << "Error: El producto con codigo " << Buscar << " no existe." << std::endl;
+                }
                 break;
-            case 2:
+            }
+            case 2: {
                 // Actualizar inventario
+                int Actualizar;
+                std::cout << "Ingrese el codigo del producto a actualizar: ";
+                std::cin >> Actualizar;
+                bool encontrado = false;
+                for (int i = 0; i < num; ++i) {
+                    if (codigos[i] == Actualizar) {
+                        int cantidad;
+                        std::cout << "Ingrese la cantidad a modificar (puede ser negativa para restar): ";
+                        std::cin >> cantidad;
+                        if (stock[i] + cantidad < 0) {
+                            std::cout << "Error: No se puede dejar el stock en negativo." << std::endl;
+                        } else {
+                            stock[i] += cantidad;
+                            std::cout << "Stock actualizado correctamente. Nuevo stock: " << stock[i] << std::endl;
+                        }
+                        encontrado = true;
+                        break;
+                    }
+                }
+                if (!encontrado) {
+                    std::cout << "Error: El producto con codigo " << Actualizar << " no existe." << std::endl;
+                }
                 break;
+            }
             case 3:
                 // Generar reporte completo
                 break;
@@ -77,12 +97,10 @@ int main() {
                 // Encontrar el producto mas caro
                 break;
             case 5:
-                // Salir del sistema
                 std::cout << "Fin del sistema" << std::endl;
                 break;
             default:
-                // Opción invalida
-                std::cout << "Opcion invalida. Intente de nuevo." << std::endl;
+                std::cout << "Opcion inválida. Intente de nuevo." << std::endl;
                 break;
         }
         std::cout << std::endl;
