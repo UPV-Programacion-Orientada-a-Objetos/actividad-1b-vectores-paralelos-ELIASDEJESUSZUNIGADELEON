@@ -108,9 +108,17 @@ int main() {
                 std::cout << "--- Fin del Reporte ---" << std::endl;
                 break;
             }
-            case 4:
-                // Encontrar el producto mas caro
+            case 4: {
+            // Encontrar el producto mas caro
+            int Productocaro = 0;
+            for (int i = 1; i < num; ++i) {
+                if (precios[i] > precios[Productocaro]) {
+                    Productocaro = i;
+                }
+            }
+            std::cout << "El producto mas caro es: " << nombres[Productocaro] << " con un precio de $" << precios[Productocaro] << std::endl;
                 break;
+            }
             case 5:
                 std::cout << "Fin del sistema" << std::endl;
                 break;
