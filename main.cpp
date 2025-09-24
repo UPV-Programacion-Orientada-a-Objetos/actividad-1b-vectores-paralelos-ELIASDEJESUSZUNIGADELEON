@@ -21,7 +21,7 @@ float precios[max] = {15.50f, 8.75f, 20.00f, 25.99f, 120.00f};
 // Variable para llevar la cuenta de productos registrados
 int numProductos = num;
 
-// Muestra el menu principal
+// Mostrar el menu principal
 void mostrarMenu() {
     std::cout << "--- Bienvenido al Sistema de Inventario de \"El Martillo\" ---" << std::endl;
     std::cout << std::endl;
@@ -44,6 +44,28 @@ int main() {
         switch (opcion) {
             case 1:
                 // Consultar un producto
+                    {
+                    int codigoBuscar;
+                    std::cout << "Ingrese el codigo del producto a consultar: ";
+                    std::cin >> codigoBuscar;
+                    // Buscar el producto por codigo
+                    bool encontrado = false;
+                    for (int i = 0; i < numProductos; ++i) {
+                        if (codigos[i] == codigoBuscar) {
+                            // Si el producto existe se mostrara su informacion
+                            std::cout << "Informacion del Producto:" << std::endl;
+                            std::cout << "Codigo: " << codigos[i] << std::endl;
+                            std::cout << "Nombre: " << nombres[i] << std::endl;
+                            std::cout << "Cantidad en stock: " << stock[i] << std::endl;
+                            std::cout << "Precio unitario: $" << precios[i] << std::endl;
+                            encontrado = true;
+                            break;
+                        }
+                    }
+                    if (!encontrado) {
+                        // Si el producto no existe 
+                        std::cout << "Error: El producto con codigo " << codigoBuscar << " no existe." << std::endl;
+                    }
                 break;
             case 2:
                 // Actualizar inventario
@@ -60,7 +82,7 @@ int main() {
                 break;
             default:
                 // Opción invalida
-                std::cout << "Opcion inválida. Intente de nuevo." << std::endl;
+                std::cout << "Opcion invalida. Intente de nuevo." << std::endl;
                 break;
         }
         std::cout << std::endl;
