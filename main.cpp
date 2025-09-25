@@ -2,25 +2,36 @@
 #include <string>
 
 // Constante para el tamaño maximo de productos
-const int max = 100;
+const int MaxProductos = 100;
 // Cantidad inicial de productos cargados
-const int num = 5;
+const int NumPodructos = 5;
 
 // Arreglos paralelos para almacenar los datos de los productos
-int codigos[max] = {101, 102, 103, 104, 105};
-std::string nombres[max] = {
+int codigos[MaxProductos] = {101, 102, 103, 104, 105};
+std::string nombres[MaxProductos] = {
     "Martillo de bola",
     "Destornillador",
     "Cinta metrica",
     "Llave inglesa",
     "Taladro inalambrico"
 };
-int stock[max] = {50, 120, 75, 45, 10};
-float precios[max] = {15.50f, 8.75f, 20.00f, 25.99f, 120.00f};
+int stock[MaxProductos] = {50, 120, 75, 45, 10};
+float precios[MaxProductos] = {15.50f, 8.75f, 20.00f, 25.99f, 120.00f};
 
 // Variable para llevar la cuenta de productos registrados
-int numProductos = num;
+int numProductos = NumPodructos;
 
+// Funcion para asegurar que la entrada sea un numero entero
+void soloNumero(const std::string& mensaje, int& variable) {
+    std::cout << mensaje;
+    std::cin >> variable;
+    while (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(1000, '\n');
+        std::cout << "Entrada invalida. Por favor ingrese un numero: ";
+        std::cin >> variable;
+    }
+}
 // Mostrar el menu principal
 void mostrarMenu() {
     std::cout << "--- Bienvenido al Sistema de Inventario de \"El Martillo\" ---" << std::endl;
@@ -39,16 +50,14 @@ int main() {
     int opcion = 0;
     do {
         mostrarMenu();
-        std::cin >> opcion;
-        // Validar entrada aun falta
+        soloNumero("", opcion);
         switch (opcion) {
             case 1: {
                 // Consultar un producto
                 int Buscar;
-                std::cout << "Ingrese el codigo del producto a consultar: ";
-                std::cin >> Buscar;
+                soloNumero("Ingrese el codigo del producto a consultar: ", Buscar);
                 bool encontrado = false;
-                for (int i = 0; i < num; ++i) {
+                for (int i = 0; i < NumPodructos; ++i) {
                     if (codigos[i] == Buscar) {
                         std::cout << "Informacion del Producto:" << std::endl;
                         std::cout << "Codigo: " << codigos[i] << std::endl;
@@ -67,14 +76,12 @@ int main() {
             case 2: {
                 // Actualizar inventario
                 int Actualizar;
-                std::cout << "Ingrese el codigo del producto a actualizar: ";
-                std::cin >> Actualizar;
+                soloNumero("Ingrese el codigo del producto a actualizar: ", Actualizar);
                 bool encontrado = false;
-                for (int i = 0; i < num; ++i) {
+                for (int i = 0; i < NumPodructos; ++i) {
                     if (codigos[i] == Actualizar) {
                         int cantidad;
-                        std::cout << "Ingrese la cantidad a modificar (puede ser negativa para restar): ";
-                        std::cin >> cantidad;
+                        soloNumero("Ingrese la cantidad a modificar (puede ser negativa para restar): ", cantidad);                 
                         if (stock[i] + cantidad < 0) {
                             std::cout << "Error: No se puede dejar el stock en negativo." << std::endl;
                         } else {
@@ -95,7 +102,7 @@ int main() {
                 std::cout << "--- Reporte de Inventario ---" << std::endl;
                 std::cout << "Codigo    | Nombre               | Stock | Precio" << std::endl;
                 std::cout << "-------------------------------------------------" << std::endl;
-                for (int i = 0; i < num; ++i) {
+                for (int i = 0; i < NumPodructos; ++i) {
                     std::cout << codigos[i] << "       | "
                               << nombres[i];
                     // Espacios para alinear nombres pequeños
@@ -109,9 +116,9 @@ int main() {
                 break;
             }
             case 4: {
-            // Encontrar el producto mas caro
+            // Encontrar el producto más caro
             int Productocaro = 0;
-            for (int i = 1; i < num; ++i) {
+            for (int i = 1; i < NumPodructos; ++i) {
                 if (precios[i] > precios[Productocaro]) {
                     Productocaro = i;
                 }
@@ -123,7 +130,7 @@ int main() {
                 std::cout << "Fin del sistema" << std::endl;
                 break;
             default:
-                std::cout << "Opcion inválida. Intente de nuevo." << std::endl;
+                std::cout << "Opcion invalida. Intente de nuevo." << std::endl;
                 break;
         }
         std::cout << std::endl;
