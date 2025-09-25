@@ -34,19 +34,18 @@ void soloNumero(const std::string& mensaje, int& variable) {
 }
 // Mostrar el menu principal
 void mostrarMenu() {
-    std::cout << "--- Bienvenido al Sistema de Inventario de \"El Martillo\" ---" << std::endl;
-    std::cout << std::endl;
+    std::cout << "--- Menu principal ---" << std::endl;
     std::cout << "Seleccione una opcion:" << std::endl;
     std::cout << "1. Consultar un producto" << std::endl;
     std::cout << "2. Actualizar inventario" << std::endl;
     std::cout << "3. Generar reporte completo" << std::endl;
     std::cout << "4. Encontrar el producto mas caro" << std::endl;
     std::cout << "5. Salir" << std::endl;
-    std::cout << std::endl;
     std::cout << "Opcion seleccionada: ";
 }
 
 int main() {
+    std::cout << "--- Bienvenido al Sistema de Inventario de \"El Martillo\" ---" << std::endl << std::endl;
     int opcion = 0;
     do {
         mostrarMenu();
